@@ -46,7 +46,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-["src/images/T3.png"](https://example.com)
+[src/images/T3.png](https://example.com)
 
 This ia a software company website with many features and fully interactive.
 The key features are :
