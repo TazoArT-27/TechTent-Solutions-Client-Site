@@ -8,7 +8,7 @@
   <h3 align="center">TechTent Solutions</h3>
 
   <p align="center">
-    A Software Company with different services for clients
+    A Software Company With Different Services For Clients
     <br />
     <a href="https://github.com/github_username/repo_name"><strong>Explore the docs »</strong></a>
     <br />
