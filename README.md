@@ -100,9 +100,11 @@ After that the other libraries and dependencies were installed
 <!-- USAGE EXAMPLES -->
 ## Usage
  
-*_Client can go through this website very easily_
-*_The services section shows the useful services provided by the company and clients can purchase any service they need_
-*_The website is well secured for clients and admins so there would be no security issues_
+_Client can go through this website very easily_
+<br />
+_The services section shows the useful services provided by the company and clients can purchase any service they need_
+<br />
+_The website is well secured for clients and admins so there would be no security issues_
 
 
 <!-- CONTACT -->
