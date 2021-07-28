@@ -1,0 +1,17 @@
+
+.customerCard{
+    border: none;
+    color: #152550!important;
+}
+@media screen and (max-width: 1167px) {
+    .testimonialCustomer {
+        width: 50%;
+        height: 300px;
+    }
+}
+@media screen and (max-width: 774px) {
+    .testimonialCustomer {
+        width: 100%;
+        height: 300px;
+    }
+}

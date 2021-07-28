@@ -1,0 +1,30 @@
+.header-img{
+    height: 700px;
+}
+.company-name{
+    font-size: 60px;
+    color: #152550;
+    font-family: 'Poppins', sans-serif;
+    font-weight: bold;
+}
+.text-head{
+    color: #152550;
+    /* font-family: 'Poppins', sans-serif; */
+}
+.header-row{
+    height: 650px;
+}
+
+.btn-services{
+    padding: 10px 30px 10px 30px;
+    background-image: linear-gradient(90deg,#0536FA, #1183FC, #20DEFD);
+}
+.btn-hire{
+    padding: 10px 45px 10px 45px;
+    background-image: linear-gradient(90deg,#0536FA, #1183FC, #20DEFD);
+}
+@media screen and (max-width: 767px) {
+    .header-img{
+        display: none;
+    }
+  }

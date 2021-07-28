@@ -1,0 +1,13 @@
+*{
+    font-family: 'Poppins', sans-serif;
+}
+@media screen and (max-width: 1167px) {
+    .card-media {
+        width: 50%;
+    }
+}
+@media screen and (max-width: 774px) {
+    .card-media {
+        width: 100%;
+    }
+}

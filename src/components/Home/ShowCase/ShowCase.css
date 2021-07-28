@@ -1,0 +1,40 @@
+.showcase{
+    font-family: 'Poppins', sans-serif;
+    color:#152550;
+}
+.techTent{
+    color: #0C73FC;
+    font-weight: bold;
+}
+.showcase-bg{
+    background-image: url(../../../images/wave2.svg);
+    background-repeat: no-repeat;
+    background-position: bottom;
+    height: 800px;
+}
+.showcaseImg{
+    height: 450px;
+    width: 100%;
+}
+
+.showcase h2{
+    font-weight: bold;
+}
+@media screen and (max-width: 767px) {
+    .tech1{
+        padding-bottom: 40px;
+    }
+    .showcaseImg{
+        height: 300px;
+    }
+  }
+@media screen and (max-width: 1167px) {
+    .showcase-bg {
+        margin-top: 50px;
+    }
+}
+@media screen and (max-width: 774px) {
+    .showcase-bg {
+        margin-top: 50px;
+    }
+}

@@ -1,0 +1,14 @@
+.navbar-brand img {
+    height: 60px;
+    width: 60px;
+}
+.text-nav{
+    color: #152550!important;
+    font-weight: bold;
+    font-family: 'Poppins', sans-serif!important;
+}
+.text-nav:hover{
+    color: #0858FB!important;
+    font-weight: bold;
+    font-family: 'Poppins', sans-serif!important;
+}
