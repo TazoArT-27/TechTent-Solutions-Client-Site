@@ -23,7 +23,7 @@
 ## About The Project
 
 <a href="https://github.com/github_username/repo_name">
-    <img src="src/images/coverPhoto.png" alt="Logo" width="80" height="80">
+    <img src="src/images/coverPhoto.PNG" alt="Cover" width="80" height="80">
  </a>
 
 This ia a software company website with many features and fully interactive.
