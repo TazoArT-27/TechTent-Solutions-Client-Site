@@ -1,0 +1,40 @@
+*{
+    font-family: 'Poppins', sans-serif;
+}
+.contact-footer{
+    background-image: url("../../../images/contactImage.jpg");
+    background-repeat: no-repeat;
+    height: 650px;
+    background-size: cover;
+    position: relative;
+    color: white;
+}
+.footerImage {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    opacity: 0.9;
+}
+.footer-container {
+    height: 600px;
+}
+.footer-row {
+    height: 550px;
+}
+.btn-footer{
+    padding: 10px 50px 10px 50px;
+    background-image: linear-gradient(90deg,#0536FA, #1183FC, #20DEFD);
+}
+@media screen and (max-width: 1167px) {
+    .maps {
+        height: 300px;
+    }
+}
+@media screen and (max-width: 774px) {
+    .maps {
+        height: 250px;
+    }
+}

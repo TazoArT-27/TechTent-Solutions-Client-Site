@@ -1,0 +1,20 @@
+*{
+    font-family: 'Poppins', sans-serif;
+}
+.industry{
+    background-color: #152550;
+}
+.industryCard{
+    border: none;
+    color: #152550;
+}
+@media screen and (max-width: 1167px) {
+    .industry-media {
+        width: 50%;
+    }
+}
+@media screen and (max-width: 774px) {
+    .industry-media {
+        width: 100%;
+    }
+}

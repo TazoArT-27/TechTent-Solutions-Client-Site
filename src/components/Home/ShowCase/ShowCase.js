@@ -8,8 +8,9 @@ const ShowCase = () => {
     AOS.init();
     return (
         <div className="showcase-bg pt-5">
-            <div className="container showcase pt-5">
-                <h2 className="text-center tech1 pt-5">Why <span className="techTent">TechTent Solutions ?</span></h2>
+            <div className="container showcase pt-5 text-center">
+                <h6 className="techTent pt-4">About</h6>
+                <h2 className=" tech1">Why <span className="techTent">TechTent Solutions ?</span></h2>
                 <div className="row align-items-center pt-5">
                     <div className="col-md-5 offset-md-1 col-sm-12 offset-md-1 justify-content-center" data-aos-duration="1000" data-aos="fade-right">
                         <h2 className="pb-4">We build software solutions that solve our clients business challenges</h2>
