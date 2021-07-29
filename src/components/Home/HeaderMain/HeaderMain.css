@@ -18,10 +18,12 @@
 .btn-services{
     padding: 10px 30px 10px 30px;
     background-image: linear-gradient(90deg,#0536FA, #1183FC, #20DEFD);
+    border: none;
 }
 .btn-hire{
     padding: 10px 45px 10px 45px;
     background-image: linear-gradient(90deg,#0536FA, #1183FC, #20DEFD);
+    border: none;
 }
 @media screen and (max-width: 767px) {
     .header-img{

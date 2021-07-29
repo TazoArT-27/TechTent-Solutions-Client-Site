@@ -10,3 +10,29 @@
 .testimonialText h2{
     font-weight: bold;
 }
+.testimonial-container .card{
+    
+    transition:  0.5s  all ease-in-out !important;
+}
+.testimonial-container .card:hover{
+    background-image: linear-gradient(75deg,#0536FA, #1183FC, #20DEFD);
+    transform: scale(1.02,1.02);
+    padding-left: 0;
+}
+.testimonial-container .card .row:hover{
+    
+    background-image: url(../../../images/Asset-6.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 60%;
+}
+
+.testimonial-container .card:hover img{
+    display: none;
+}
+.testimonial-container .card:hover h5,
+.testimonial-container .card:hover p,
+.testimonial-container .card:hover small
+{
+    color: transparent !important;
+}

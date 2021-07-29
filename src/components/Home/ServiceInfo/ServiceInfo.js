@@ -11,7 +11,7 @@ const ServiceInfo = (props) => {
                     <div className="card-body">
                         <h5 className="card-title">{name}</h5>
                         <p className="card-text text-muted">{description}</p>
-                        <button className="btn btn-primary btn-services">Order Now</button>
+                        <button className="btn btn-primary btn-order">Order Now</button>
                     </div>
                 </div>
             </div>

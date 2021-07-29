@@ -10,3 +10,8 @@
     transform: scale(1.05,1.05);
     border-radius: 15px;
 }
+.btn-order{
+    padding: 10px 40px 10px 40px;
+    background-image: linear-gradient(90deg,#0536FA, #1183FC, #20DEFD);
+    border: none;
+}
