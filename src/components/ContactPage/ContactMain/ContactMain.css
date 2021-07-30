@@ -1,0 +1,33 @@
+.contact-main{
+    height: 700px;
+    color: #152550;
+    background-color: #FEFDFF;
+    background-image: url("../../../images/waveBlue.svg");
+    background-repeat: no-repeat;
+    background-position: bottom;
+}
+.contact-container{
+    /* background-image: url("../../../images/contactPage2.png");
+    background-repeat: no-repeat;
+    background-position: top left;
+    background-size: 100px 100px; */
+}
+.contact-row{
+    height: 600px;
+    background-image: url("../../../images/blob.svg");
+    background-repeat: no-repeat;
+    background-position: top right;
+    background-size: 60px 60px;
+}
+.contact-form{
+    box-shadow: 0px 0px 20px #fbfcff;
+    border-radius: 15px;
+    height: 540px;
+    background-color: #fff;
+    border: 1px solid #2a37f063;
+
+}
+.form-contact{
+    border: none;
+    background-color: #F7F6FF;
+}

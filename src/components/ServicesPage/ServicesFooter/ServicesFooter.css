@@ -1,0 +1,38 @@
+*{
+    font-family: 'Poppins', sans-serif;
+}
+.service-footer{
+    background-image: url("../../../images/servicesHeaderImage.jpg");
+    background-repeat: no-repeat;
+    height: 680px;
+    background-size: cover;
+    position: relative;
+    color: white;
+}
+.service-footerImage{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    opacity: 0.7;
+}
+.service-footer-container{
+    height: 630px;
+}
+.service-footer-row{
+    height: 580px;
+}
+.btn-service-footer{
+    padding: 20px 50px 20px 50px;
+    background-image: linear-gradient(90deg,#0536FA, #1183FC, #20DEFD);
+    border: none;
+    border-radius: 40px;
+}
+.svg_icons{
+    transform: scale(1.8);
+  }
+.svg_icons_call{
+    transform: scale(1.3);
+  }

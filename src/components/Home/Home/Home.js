@@ -8,14 +8,14 @@ import Testimonial from '../Testimonial/Testimonial';
 
 const Home = () => {
     return (
-        <div>
+        <>
             <Header></Header>
             <BusinessServices></BusinessServices>
             <ShowCase></ShowCase>
             <Industry></Industry>
             <Testimonial></Testimonial>
             <ContactFooter></ContactFooter>
-        </div>
+        </>
     );
 };
 
