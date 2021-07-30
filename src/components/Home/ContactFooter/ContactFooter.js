@@ -3,7 +3,7 @@ import './ContactFooter.css';
 
 const ContactFooter = () => {
     return (
-        <section className="py-5 contact-footer text-white">
+        <section className="py-5 mt-5 contact-footer text-white">
             <div className='footerImage p-5'>
                 <div className="container footer-container">
                     <div className="row align-items-center justify-content-center footer-row">

@@ -19,13 +19,13 @@ const Navbar = () => {
                                 <a class="nav-link me-5 text-nav" aria-current="page" href="#">Home</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link me-5 text-nav" aria-current="page" href="#">About</a>
+                                <a class="nav-link me-5 text-nav" aria-current="page" href="#about">About</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link me-5 text-nav" aria-current="page" href="#">Contact</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link me-5 text-nav" aria-current="page" href="#">Reviews</a>
+                                <a class="nav-link me-5 text-nav" aria-current="page" href="#testimonial">Reviews</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link me-5 text-nav" aria-current="page" href="#">Blogs</a>

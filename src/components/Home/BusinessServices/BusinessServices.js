@@ -30,7 +30,7 @@ const services = [
 
 const BusinessServices = () => {
     return (
-        <section className="pt-5 business">
+        <section id="services" className="pt-5 business">
             <div className="text-center py-5">
                 <h6 className="techTent">Our Services</h6>
                 <h2 className="fw-bold" style={{color: '#153060'}}>Explore What We Offer</h2>
