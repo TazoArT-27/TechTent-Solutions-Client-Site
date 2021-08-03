@@ -1,8 +1,14 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 import './ServiceCard.css';
 
 const ServiceCard = (props) => {
     const {image, name, description} = props.featured;
+
+    const history = useHistory();
+    const handleOrder = () => {
+        history.push("/orderUser")
+    }
     return (
         <div className="col-lg-3 col-md-4 col-sm-10 gy-4 featured-media">
             <div className="ps-5 ms-1">
@@ -13,7 +19,7 @@ const ServiceCard = (props) => {
                     <div className="card-body">
                         <h5 className="card-title">{name}</h5>
                         <p className="card-text text-muted">{description}</p>
-                        <button className="btn btn-primary btn-order">Order Now</button>
+                        <button onClick={handleOrder} className="btn btn-primary btn-order">Order Now</button>
                     </div>
                 </div>
             </div>

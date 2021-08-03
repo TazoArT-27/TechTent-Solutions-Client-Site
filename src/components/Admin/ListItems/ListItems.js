@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
@@ -12,8 +12,12 @@ import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import ListAltIcon from '@material-ui/icons/ListAlt';
 import { Link } from 'react-router-dom';
 import './ListItems.css';
+import { UserContext } from './../../../App';
 
-export const mainListItems = (
+
+const ListItems = () => {
+  const [loggedInUser, setLoggedInUser] = useContext(UserContext);
+  return (
     <div>
         <ListItem button>
             <ListItemIcon>
@@ -49,11 +53,8 @@ export const mainListItems = (
         </ListItemIcon>
         <ListItemText primary="Integrations" />
       </ListItem> */}
-    </div>
-  );
-  
-  export const secondaryListItems = (
-    <div>
+
+    
       <ListSubheader inset>Management</ListSubheader>
       <Link to="/addAdmin" className="navbarLinks">
         <ListItem button>
@@ -77,7 +78,7 @@ export const mainListItems = (
         </ListItemIcon>
         <ListItemText primary="Manage Services" />
       </ListItem>
-      <ListItem button>
+      <ListItem button onClick={()=>setLoggedInUser({})}>
         <ListItemIcon>
           <PowerSettingsNewIcon />
         </ListItemIcon>
@@ -85,3 +86,10 @@ export const mainListItems = (
       </ListItem>
     </div>
   );
+};
+
+export default ListItems;
+
+// export const mainListItems = (
+  
+//   );

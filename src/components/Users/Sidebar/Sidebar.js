@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
@@ -10,8 +10,11 @@ import ViewListIcon from '@material-ui/icons/ViewList';
 import RateReviewIcon from '@material-ui/icons/RateReview';
 import { Link } from 'react-router-dom';
 import './Sidebar.css';
+import { UserContext } from '../../../App';
 
-export const mainListItems = (
+const Sidebar = () => {
+  const [loggedInUser, setLoggedInUser] = useContext(UserContext)
+  return (
     <div>
         <ListItem button>
             <ListItemIcon>
@@ -43,7 +46,7 @@ export const mainListItems = (
             <ListItemText primary="Review" />
         </ListItem>
         </Link>
-        <ListItem button>
+        <ListItem button onClick={()=>setLoggedInUser({})}>
         <ListItemIcon>
           <PowerSettingsNewIcon />
         </ListItemIcon>
@@ -51,3 +54,6 @@ export const mainListItems = (
       </ListItem>
     </div>
   );
+};
+
+export default Sidebar;

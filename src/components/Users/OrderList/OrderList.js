@@ -15,7 +15,7 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import Paper from '@material-ui/core/Paper';
 import { Link } from 'react-router-dom';
-import { mainListItems } from '../Sidebar/Sidebar';
+import Sidebar from '../Sidebar/Sidebar';
 
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -172,7 +172,7 @@ const OrderList = () => {
                 </IconButton>
                 </div>
                 <Divider />
-                <List>{mainListItems}</List>
+                <List><Sidebar/></List>
             </Drawer> 
             <main className={classes.content}>
                 <div className={classes.appBarSpacer} />

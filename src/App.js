@@ -1,4 +1,4 @@
-import React from "react";
+import React, { createContext, useState } from "react";
 import {
   BrowserRouter as Router,
   Switch,
@@ -15,10 +15,17 @@ import AddService from "./components/Admin/AddService/AddService";
 import OrderForm from "./components/Users/OrderForm/OrderForm";
 import Review from "./components/Users/Review/Review";
 import OrderList from "./components/Users/OrderList/OrderList";
+import Login from "./components/Login/Login/Login";
+import PrivateRoute from './components/Login/PrivateRoute/PrivateRoute';
+import SignUp from "./components/Login/SignUp/SignUp";
+
+export const UserContext = createContext();
 
 function App() {
+  const [loggedInUser, setLoggedInUser] = useState({});
   return (
-    <Router>
+    <UserContext.Provider value={[loggedInUser, setLoggedInUser]}>
+      <Router>
       <Switch>
         <Route exact path="/">
           <Home></Home>
@@ -32,32 +39,40 @@ function App() {
         <Route path="/contact">
           <ContactPage></ContactPage>
         </Route>
-        <Route path="/admin">
+        <Route path="/login">
+          <Login></Login>
+        </Route>
+        <Route path="/signUp">
+          <SignUp></SignUp>
+        </Route>
+        <PrivateRoute path="/admin">
           <Admin></Admin>
-        </Route>
-        <Route path="/orderPage">
+        </PrivateRoute>
+        <PrivateRoute path="/orderPage">
           <OrdersPage></OrdersPage>
-        </Route>
-        <Route path="/customersPage">
+        </PrivateRoute>
+        <PrivateRoute path="/customersPage">
           <CustomersPage></CustomersPage>
-        </Route>
-        <Route path="/addAdmin">
+        </PrivateRoute>
+        <PrivateRoute path="/addAdmin">
           <AddAdmin></AddAdmin>
-        </Route>
-        <Route path="/addService">
+        </PrivateRoute>
+        <PrivateRoute path="/addService">
           <AddService></AddService>
-        </Route>
-        <Route path="/orderUser">
+        </PrivateRoute>
+        <PrivateRoute path="/orderUser">
           <OrderForm></OrderForm>
-        </Route>
-        <Route path="/reviewUser">
+        </PrivateRoute>
+        <PrivateRoute path="/reviewUser">
           <Review></Review>
-        </Route>
-        <Route path="/orderListUser">
+        </PrivateRoute>
+        <PrivateRoute path="/orderListUser">
           <OrderList></OrderList>
-        </Route>
+        </PrivateRoute>
+        
       </Switch>
     </Router>
+    </UserContext.Provider>
   );
 }
 

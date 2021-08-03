@@ -17,7 +17,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import { Link } from 'react-router-dom';
-import { mainListItems, secondaryListItems } from '../../ListItems/ListItems';
+import ListItems from '../../ListItems/ListItems';
 
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -177,9 +177,7 @@ const OrdersPage = () => {
                 </IconButton>
                 </div>
                 <Divider />
-                <List>{mainListItems}</List>
-                <Divider />
-                <List>{secondaryListItems}</List>
+                <List><ListItems/></List>
             </Drawer> 
             <main className={classes.content}>
                 <div className={classes.appBarSpacer} />

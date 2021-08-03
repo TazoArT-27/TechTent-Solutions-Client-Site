@@ -14,7 +14,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import { Link } from 'react-router-dom';
-import { mainListItems } from '../Sidebar/Sidebar';
+import Sidebar from '../Sidebar/Sidebar';
 import { useForm } from "react-hook-form";
 
 const drawerWidth = 240;
@@ -154,7 +154,7 @@ const OrderForm = () => {
                 </IconButton>
                 </div>
                 <Divider />
-                <List>{mainListItems}</List>
+                <List><Sidebar/></List>
             </Drawer> 
             <main className={classes.content}>
                 <div className={classes.appBarSpacer} />
