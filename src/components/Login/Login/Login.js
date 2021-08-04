@@ -9,7 +9,6 @@ import { UserContext } from './../../../App';
 import { useHistory, useLocation, Link } from 'react-router-dom';
 import Navbar from '../../Home/Navbar/Navbar';
 import './Login.css';
-import { useForm } from "react-hook-form";
 import logo from '../../../images/Asset-6.png';
 import google from '../../../images/google.png';
 
@@ -17,9 +16,8 @@ import google from '../../../images/google.png';
 if (!firebase.apps.length) {
     firebase.initializeApp(firebaseConfig);
  }else {
-    firebase.app(); // if already initialized, use that one
+    firebase.app(); 
  }
-// firebase.initializeApp(firebaseConfig);
 const MySwal = withReactContent(Swal)
 
 const Login = () => {
@@ -28,12 +26,9 @@ const Login = () => {
     let location = useLocation();
     let { from } = location.state || { from: { pathname: "/" } };
 
-    // const { register, watch, formState: { errors } } = useForm();
-    // const onSubmit = data => console.log(data);
 
     const provider = new firebase.auth.GoogleAuthProvider();
 
-      // Sign In & Sign Out With Google Account
   const [user, setUser] = useState({
     isSignedIn: false,
     name: '',
@@ -45,7 +40,6 @@ const Login = () => {
   })
 
   const handleSignIn = () => {
-    //console.log('Clicked');
     firebase.auth()
       .signInWithPopup(provider)
       .then((result) => {
@@ -83,7 +77,6 @@ const Login = () => {
             title: 'Oops...',
             text: 'Something went wrong!',
           })
-        //console.log(error.message)
   });
 
   }
@@ -115,19 +108,12 @@ const Login = () => {
         })
       })
     }).catch((error) => {
-      // An error happened.
     });
   }
-
-  // Sign Up & Sign In With Email Address & Password
-
-  // const [newUser, setNewUser] =useState(false);
-
   const handleBlur = (event) => {
     let isFieldValid;
     if(event.target.name === 'email'){
       isFieldValid = /\S+@\S+\.\S+/.test(event.target.value);
-      //console.log(isFieldValid);
     }
     if(event.target.name === 'password'){
       const isPasswordValid = event.target.value.length > 6;
@@ -137,61 +123,25 @@ const Login = () => {
     }
     if(event.target.name === 'name'){
       isFieldValid = event.target.value;
-      //console.log(isFieldValid);
     }
     if(isFieldValid){
      const newUserInfo = {...user};
      newUserInfo[event.target.name] = event.target.value;
      setUser(newUserInfo);
-
     }
-     //console.log(event.target.value);
   }
 
   const handleSubmit = (event) => {
-    //console.log(user.email, user.password)
-    // if(newUser && user.email && user.password){
-    //    //console.log('submitting')
-    //    firebase.auth().createUserWithEmailAndPassword(user.email, user.password)
-    //     // Handle Errors here.
-    //     .then(response => {
-    //       const newUserInfo = {...user};
-    //       newUserInfo.error = '';
-    //       //console.log(response)
-          
-    //       updateUserName(user.name);
-    //       newUserInfo.success = true;
-    //       verificationMail(user.email);
-    //       setUser(newUserInfo);
-    //     })
-    //     .catch(error =>{
-    //     const newUserInfo = {...user};
-    //     //var errorCode = error.code;
-    //     //var errorMessage = error.message;
-    //     //console.error(errorCode,errorMessage)
-    //     newUserInfo.errorCode = error.code;
-    //     newUserInfo.error = error.message;
-    //     newUserInfo.success = false;
-    //     setUser(newUserInfo);
-    //     })
-       
-        
-      
-    // }
-    
-    // if(!newUser && user.email && user.password){
       if(user.email && user.password){
       firebase.auth().signInWithEmailAndPassword(user.email, user.password)
       .then(response => {
         const newUserInfo = {...user};
           newUserInfo.error = '';
           newUserInfo.isSignedIn = true;
-          //console.log(response)
           newUserInfo.success = true;
           setUser(newUserInfo);
           setLoggedInUser(newUserInfo);
           history.replace(from)
-          //console.log('sign in user info', response.user)
           MySwal.fire({
             didOpen: () => {
                 
@@ -210,11 +160,7 @@ const Login = () => {
           })
       })
       .catch(function(error) {
-          //console.log(error);
         const newUserInfo = {...user};
-        // var errorCode = error.code;
-        // var errorMessage = error.message;
-        // console.error(errorCode,errorMessage)
         newUserInfo.errorCode = error.code;
         newUserInfo.error = error.message;
         newUserInfo.success = false;
@@ -229,79 +175,8 @@ const Login = () => {
 
     event.preventDefault()
   }
-
-  // const updateUserName = name => {
-  //   const user = firebase.auth().currentUser;
-
-  //     user.updateProfile({
-  //       displayName: name,
-        
-  //     }).then(function() {
-  //       // Update successful.
-  //       //console.log(username updated successfully)
-  //       console.log("User name updated successfully");
-  //     }).catch(function(error) {
-  //       // An error happened.
-  //     });
-  // }
-
-  // const verificationMail = (email) => {
-  //   firebase.auth().currentUser.sendEmailVerification()
-  //   .then(() => {
-  //   //   window.alert('Verification email sent');
-  //   Swal.fire({
-  //       icon: 'info',
-  //       title: 'Done',
-  //       text: 'Verification Email Sent',
-  //     })
-  //   });
-  // }
-
     return (
         <div>
-            {/* Google Account Sign In */}
-
-      {/* {
-        user.isSignedIn ? <button onClick={handleSignOut}>Sign out</button> : <button onClick={handleSignIn}>Sign in</button>
-      } */}
-      {/* {
-        user.isSignedIn && 
-        <div>
-          <p>Welcome {user.name}</p>
-          <p>Email: {user.email}</p>
-          <img src={user.photoURL} alt="photo"></img>
-        </div>
-      } */}
-
-
-    {/* Sign Up and Sign In With Email Address & Password */}
-
-      {/* <h3>Email & Password Method</h3>
-      {
-        user.isSignedIn? 
-        <div>
-          <p>Welcome {user.name}</p>
-          <p>Email: {user.email}</p>
-        </div>: 
-        <div>
-            <input type="checkbox" onChange={() => setNewUser(!newUser)} name="newUser" id=""/>
-            <label htmlFor="newUser">New User Sign Up</label>
-            <form onSubmit={handleSubmit} action="">
-            {newUser && <input type="text" name='name' onBlur={handleBlur} placeholder='name' required/>}
-            <br/>
-            <input type="text" name="email" onBlur={handleBlur} placeholder="write your email address" required/>
-            <br/>
-            <input type="password" name="password" onBlur={handleBlur} placeholder="your password" required/>
-            <br/>
-            <input type="submit" value={newUser ? 'Submit' : 'Sign In'}></input>
-          </form>
-        </div>
-      }
-      
-      <p style={{color: 'red'}}>{user.error}</p>
-      {
-        user.success && <p style={{color: 'green'}}>User {newUser ? 'created' : 'logged in'} success!</p>
-      } */}
         <Navbar></Navbar>
         <div className="login-container p-5">
         <div className="container px-5">
@@ -314,10 +189,10 @@ const Login = () => {
                 <form  onSubmit={handleSubmit} className="login-form p-5">
                             
                             <div className="mb-4">
-                                <input name="email" type="text" onBlur={handleBlur} className="form-control login-input" placeholder="E-mail" />
+                                <input name="email" type="text" onBlur={handleBlur} className="form-control login-input" placeholder="E-mail" required/>
                             </div>
                             <div className="mb-4">
-                                <input onBlur={handleBlur} name="password" type="password" className="form-control login-input" placeholder="Password" />
+                                <input onBlur={handleBlur} name="password" type="password" className="form-control login-input" placeholder="Password"  required />
                                 
                             </div>
                             <div className="mb-4">

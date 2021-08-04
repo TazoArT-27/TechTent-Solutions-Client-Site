@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './ContactFooter.css';
 
 const ContactFooter = () => {
@@ -12,7 +13,9 @@ const ContactFooter = () => {
                             <h6 className="pb-5">Contact us to discuss your project and how we can help</h6>
                             <p className="pb-3">+880 1521773102</p>
                             <p className="pb-3">shafayat.tazoar27@gmail.com</p>
-                            <button type="button" class="btn btn-primary btn-footer">Contact Us</button>
+                            <Link to="/contact">
+                                <button type="button" class="btn btn-primary btn-footer">Contact Us</button>
+                            </Link>
                         </div>
                         <div className="col-md-2 col-sm-12"></div>
                         <div className="col-md-5 col-sm-12">

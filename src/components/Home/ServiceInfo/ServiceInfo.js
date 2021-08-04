@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './ServiceInfo.css';
 
 const ServiceInfo = (props) => {
@@ -11,7 +12,9 @@ const ServiceInfo = (props) => {
                     <div className="card-body">
                         <h5 className="card-title">{name}</h5>
                         <p className="card-text text-muted">{description}</p>
-                        <button className="btn btn-primary btn-order">Order Now</button>
+                        <Link to="/services">
+                            <button className="btn btn-primary btn-order">Order Now</button>
+                        </Link>
                     </div>
                 </div>
             </div>

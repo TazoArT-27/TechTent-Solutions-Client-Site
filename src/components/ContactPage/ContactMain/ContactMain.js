@@ -34,17 +34,17 @@ const ContactMain = () => {
                                 <h2 className="fw-bold mb-4">Send us a message<span className="ms-3"><TelegramIcon className="svg_icons"></TelegramIcon></span></h2>
                             </div>
                             <div className="mb-4">
-                                <input name="name" type="text" className="form-control form-contact" placeholder="Full name*"/>
+                                <input name="name" type="text" className="form-control form-contact" placeholder="Full name*" required/>
                             </div>
                             <div className="mb-4">
-                                <input name="email" type="email" className="form-control form-contact" placeholder="Email address*"/>
+                                <input name="email" type="email" className="form-control form-contact" placeholder="Email address*" required/>
                             </div>
                             <div className="mb-4">
-                                <input name="subject" type="text" className="form-control form-contact" placeholder="Subject*"/>
+                                <input name="subject" type="text" className="form-control form-contact" placeholder="Subject*" required/>
                             </div>
                             <div className="mb-3">
                                 <label for="exampleFormControlTextarea1" className="form-label">Tell us more about your idea</label>
-                                <textarea name="message" type="text" className="form-control form-contact"rows="3"></textarea>
+                                <textarea name="message" type="text" className="form-control form-contact"rows="3" required></textarea>
                             </div>
                             <div className="mb-4">
                                 <button type="submit" className="btn btn-order text-white mb-3">Submit</button>
