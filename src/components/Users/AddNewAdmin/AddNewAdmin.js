@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -17,7 +17,7 @@ import { Link } from 'react-router-dom';
 import Sidebar from '../Sidebar/Sidebar';
 import { useForm } from "react-hook-form";
 import { UserContext } from '../../../App';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 
 const drawerWidth = 240;
   
@@ -99,10 +99,7 @@ const useStyles = makeStyles((theme) => ({
     height: 240,
   },
 }));
-
-
-
-const Review = () => {
+const AddAdmin = () => {
     const classes = useStyles();
     const [open, setOpen] = React.useState(true);
     const handleDrawerOpen = () => {
@@ -114,29 +111,28 @@ const Review = () => {
 
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
     //const onSubmit = data => console.log(data);
-
     const [loggedInUser, setLoggedInUser] = useContext(UserContext)
     const [info, setInfo] = useState({
-      name: loggedInUser.name
+      name: loggedInUser.name,
+      email: loggedInUser.email
+
     })
 
     const onSubmit = (data) => {
-      // const newOrder = {...loggedInUser}
-      data.email = loggedInUser.email;
-      data.photoURL = loggedInUser.photoURL;
-      fetch('http://localhost:5000/review', {
-        method: 'POST',
-        headers: { 'content-type': 'application/json' },
-        body: JSON.stringify(data)
-        })
-        .then(res => res.json())
-        .then(success => {
-            if (success) {
-                alert('Submitted Successfully')
-            }
-
-        })
-    }
+        // const newOrder = {...loggedInUser}
+        fetch('http://localhost:5000/addNewAdmin', {
+          method: 'POST',
+          headers: { 'content-type': 'application/json' },
+          body: JSON.stringify(data)
+          })
+          .then(res => res.json())
+          .then(success => {
+              if (success) {
+                  alert('Submitted Successfully')
+              }
+  
+          })
+      }
 
     return (
         <div>
@@ -162,7 +158,7 @@ const Review = () => {
                     Dashboard
                 </Typography>
                 <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
-                    <h6>{loggedInUser.name}, you can share your experience with us.</h6>
+                    <h6>Hello, {loggedInUser.name}!</h6>
                 </Typography>
                 <IconButton color="inherit">
                     <Badge badgeContent={4} color="secondary">
@@ -170,7 +166,7 @@ const Review = () => {
                     </Badge>
                 </IconButton>
                 </Toolbar>
-            </AppBar>   
+            </AppBar>
             <Drawer
                 variant="permanent"
                 classes={{
@@ -185,7 +181,7 @@ const Review = () => {
                 </div>
                 <Divider />
                 <List><Sidebar/></List>
-            </Drawer> 
+            </Drawer>  
             <main className={classes.content}>
                 <div className={classes.appBarSpacer} />
                     <div className="p-5">
@@ -193,14 +189,18 @@ const Review = () => {
                         {/* <input defaultValue="test" {...register("example")} /> */}
                         <div class="mb-3">
                             <label for="exampleFormControlInput1" class="form-label">Name</label>
-                            <input name="name" {...register("name", { required: true })} type="text" class="form-control" id="exampleFormControlInput1" placeholder="name" value={info.name}/>
+                            <input name="name" {...register("name", { required: true })} type="text" class="form-control" id="exampleFormControlInput1" placeholder="name"/>
                             {errors.name && <span className="text-danger">Name is required</span>}
                         </div>
                         <div class="mb-3">
-                            <label for="exampleFormControlInput1" class="form-label">Review</label>
-                            <input name="review" {...register("review", { required: true })} type="text" class="form-control" id="exampleFormControlInput1" placeholder="say something"/>
-                            {errors.review && <span className="text-danger">Review is required</span>}
+                            <label for="exampleFormControlInput1" class="form-label">Email address</label>
+                            <input name="email" {...register("email", { required: true })} type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com"/>
+                            {errors.email && <span className="text-danger">Email required</span>}
                         </div>
+                        
+                        {/* <input {...register("exampleRequired", { required: true })} />
+                        {errors.exampleRequired && <span>This field is required</span>} */}
+                        
                         <input type="submit" />
                     </form>
                     </div>
@@ -210,4 +210,4 @@ const Review = () => {
     );
 };
 
-export default Review;
+export default AddAdmin;

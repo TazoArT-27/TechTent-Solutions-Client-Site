@@ -7,17 +7,17 @@ import {
 import Home from "./components/Home/Home/Home";
 import ServicesPage from "./components/ServicesPage/ServicesPage/ServicesPage";
 import ContactPage from './components/ContactPage/ContactPage/ContactPage';
-import Admin from "./components/Admin/Admin/Admin";
-import OrdersPage from "./components/Admin/OrdersPage/OrdersPage/OrdersPage";
-import CustomersPage from "./components/Admin/CustomersPage/CustomersPage";
-import AddAdmin from "./components/Admin/AddAdmin/AddAdmin";
-import AddService from "./components/Admin/AddService/AddService";
 import OrderForm from "./components/Users/OrderForm/OrderForm";
 import Review from "./components/Users/Review/Review";
 import OrderList from "./components/Users/OrderList/OrderList";
 import Login from "./components/Login/Login/Login";
 import PrivateRoute from './components/Login/PrivateRoute/PrivateRoute';
 import SignUp from "./components/Login/SignUp/SignUp";
+import NotFound from "./components/NotFound/NotFound";
+// import AddAdmin from './components/Users/AddAdmin/AddAdmin';
+import AddAdmin from './components/Admin/AddAdmin/AddAdmin';
+import AddNewAdmin from './components/Users/AddNewAdmin/AddNewAdmin'
+import AllOrders from './components/Users/AllOrders/AllOrders'
 
 export const UserContext = createContext();
 
@@ -45,21 +45,7 @@ function App() {
         <Route path="/signUp">
           <SignUp></SignUp>
         </Route>
-        <PrivateRoute path="/admin">
-          <Admin></Admin>
-        </PrivateRoute>
-        <PrivateRoute path="/orderPage">
-          <OrdersPage></OrdersPage>
-        </PrivateRoute>
-        <PrivateRoute path="/customersPage">
-          <CustomersPage></CustomersPage>
-        </PrivateRoute>
-        <PrivateRoute path="/addAdmin">
-          <AddAdmin></AddAdmin>
-        </PrivateRoute>
-        <PrivateRoute path="/addService">
-          <AddService></AddService>
-        </PrivateRoute>
+
         <PrivateRoute path="/orderUser">
           <OrderForm></OrderForm>
         </PrivateRoute>
@@ -69,7 +55,22 @@ function App() {
         <PrivateRoute path="/orderListUser">
           <OrderList></OrderList>
         </PrivateRoute>
-        
+        <PrivateRoute path="/newAdmin">
+          <AddNewAdmin></AddNewAdmin>
+        </PrivateRoute>
+        {/* <PrivateRoute path="/newAdmin">
+          <AddNewAdmin></AddNewAdmin>
+        </PrivateRoute> */}
+
+
+
+        <PrivateRoute path="/allOrders">
+          <AllOrders></AllOrders>
+        </PrivateRoute>
+
+        <Route path="*">
+          <NotFound></NotFound>
+        </Route>
       </Switch>
     </Router>
     </UserContext.Provider>

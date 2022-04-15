@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -13,11 +13,19 @@ import Badge from '@material-ui/core/Badge';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import NotificationsIcon from '@material-ui/icons/Notifications';
+import Paper from '@material-ui/core/Paper';
 import { Link } from 'react-router-dom';
 import Sidebar from '../Sidebar/Sidebar';
-import { useForm } from "react-hook-form";
-import { UserContext } from '../../../App';
-import { useState } from 'react';
+
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableContainer from '@material-ui/core/TableContainer';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
+import { useState, useEffect, useContext } from 'react';
+import { UserContext } from './../../../App';
+
 
 const drawerWidth = 240;
   
@@ -98,11 +106,22 @@ const useStyles = makeStyles((theme) => ({
   fixedHeight: {
     height: 240,
   },
+  table: {
+    minWidth: 650,
+  },
 }));
+// function createData(name, calories, fat, carbs, protein) {
+//     return { name, calories, fat, carbs, protein };
+//   }
+// const rows = [
+//     createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
+//     createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
+//     createData('Eclair', 262, 16.0, 24, 6.0),
+//     createData('Cupcake', 305, 3.7, 67, 4.3),
+//     createData('Gingerbread', 356, 16.0, 49, 3.9),
+//   ];
 
-
-
-const Review = () => {
+const OrderList = () => {
     const classes = useStyles();
     const [open, setOpen] = React.useState(true);
     const handleDrawerOpen = () => {
@@ -112,34 +131,27 @@ const Review = () => {
         setOpen(false);
     };
 
-    const { register, handleSubmit, watch, formState: { errors } } = useForm();
-    //const onSubmit = data => console.log(data);
+    const [orders, setOrders] = useState([]);
+    const [loggedInUser, setLoggedInUser] = useContext(UserContext);
+    useEffect(() => {
+      fetch('http://localhost:5000/allOrders'
+    //   , {
+    //     method: 'GET',
+    //     headers: { 
+    //       'Content-Type': 'application/json',
+    //     //   authorization: `Bearer ${sessionStorage.getItem('token')}`
+    //   }
+    //   }
+      )
+      .then(res => res.json())
+      .then(data => setOrders(data))
+      console.log(setOrders)
+    }, [])
 
-    const [loggedInUser, setLoggedInUser] = useContext(UserContext)
-    const [info, setInfo] = useState({
-      name: loggedInUser.name
-    })
-
-    const onSubmit = (data) => {
-      // const newOrder = {...loggedInUser}
-      data.email = loggedInUser.email;
-      data.photoURL = loggedInUser.photoURL;
-      fetch('http://localhost:5000/review', {
-        method: 'POST',
-        headers: { 'content-type': 'application/json' },
-        body: JSON.stringify(data)
-        })
-        .then(res => res.json())
-        .then(success => {
-            if (success) {
-                alert('Submitted Successfully')
-            }
-
-        })
-    }
+    
 
     return (
-        <div>
+<div>
             <div className={classes.root}>
             <CssBaseline />
             <AppBar position="absolute" className={clsx(classes.appBar, open && classes.appBarShift)}>
@@ -160,9 +172,6 @@ const Review = () => {
                 </Link>
                 <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
                     Dashboard
-                </Typography>
-                <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
-                    <h6>{loggedInUser.name}, you can share your experience with us.</h6>
                 </Typography>
                 <IconButton color="inherit">
                     <Badge badgeContent={4} color="secondary">
@@ -188,26 +197,36 @@ const Review = () => {
             </Drawer> 
             <main className={classes.content}>
                 <div className={classes.appBarSpacer} />
-                    <div className="p-5">
-                    <form onSubmit={handleSubmit(onSubmit)}>
-                        {/* <input defaultValue="test" {...register("example")} /> */}
-                        <div class="mb-3">
-                            <label for="exampleFormControlInput1" class="form-label">Name</label>
-                            <input name="name" {...register("name", { required: true })} type="text" class="form-control" id="exampleFormControlInput1" placeholder="name" value={info.name}/>
-                            {errors.name && <span className="text-danger">Name is required</span>}
-                        </div>
-                        <div class="mb-3">
-                            <label for="exampleFormControlInput1" class="form-label">Review</label>
-                            <input name="review" {...register("review", { required: true })} type="text" class="form-control" id="exampleFormControlInput1" placeholder="say something"/>
-                            {errors.review && <span className="text-danger">Review is required</span>}
-                        </div>
-                        <input type="submit" />
-                    </form>
-                    </div>
+                <div className="p-5">
+                <TableContainer component={Paper}>
+                    <Table className={classes.table} aria-label="simple table">
+                        <TableHead>
+                        <TableRow>
+                            <TableCell>Name</TableCell>
+                            <TableCell align="left">Email</TableCell>
+                            <TableCell align="left">Service&nbsp;</TableCell>
+                            {/* <TableCell align="right">Carbs&nbsp;(g)</TableCell>
+                            <TableCell align="right">Protein&nbsp;(g)</TableCell> */}
+                        </TableRow>
+                        </TableHead>
+                        <TableBody>
+                          {orders.map((row) => (
+                              <TableRow key={row.name}>
+                              <TableCell component="th" scope="row">
+                                  {row.name}
+                              </TableCell>
+                              <TableCell align="left">{row.email}</TableCell>
+                              <TableCell align="left">{row.service}</TableCell>
+                              </TableRow>
+                          ))}
+                        </TableBody>
+                    </Table>
+                </TableContainer>
+                </div>
             </main>
             </div>
         </div>
     );
 };
 
-export default Review;
+export default OrderList;

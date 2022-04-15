@@ -23,6 +23,8 @@ import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
+import { useState, useEffect, useContext } from 'react';
+import { UserContext } from './../../../App';
 
 
 const drawerWidth = 240;
@@ -108,16 +110,16 @@ const useStyles = makeStyles((theme) => ({
     minWidth: 650,
   },
 }));
-function createData(name, calories, fat, carbs, protein) {
-    return { name, calories, fat, carbs, protein };
-  }
-const rows = [
-    createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-    createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-    createData('Eclair', 262, 16.0, 24, 6.0),
-    createData('Cupcake', 305, 3.7, 67, 4.3),
-    createData('Gingerbread', 356, 16.0, 49, 3.9),
-  ];
+// function createData(name, calories, fat, carbs, protein) {
+//     return { name, calories, fat, carbs, protein };
+//   }
+// const rows = [
+//     createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
+//     createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
+//     createData('Eclair', 262, 16.0, 24, 6.0),
+//     createData('Cupcake', 305, 3.7, 67, 4.3),
+//     createData('Gingerbread', 356, 16.0, 49, 3.9),
+//   ];
 
 const OrderList = () => {
     const classes = useStyles();
@@ -128,6 +130,24 @@ const OrderList = () => {
     const handleDrawerClose = () => {
         setOpen(false);
     };
+
+    const [orders, setOrders] = useState([]);
+    const [loggedInUser, setLoggedInUser] = useContext(UserContext);
+    useEffect(() => {
+      fetch('http://localhost:5000/orders?email='+loggedInUser.email)
+      // , {
+      //   method: 'GET',
+      //   headers: { 
+      //     'Content-Type': 'application/json',
+      //     // authorization: `Bearer ${sessionStorage.getItem('token')}`
+      // }
+      // }
+      
+      .then(res => res.json())
+      .then(data => setOrders(data))
+    }, [])
+
+    
 
     return (
 <div>
@@ -181,25 +201,23 @@ const OrderList = () => {
                     <Table className={classes.table} aria-label="simple table">
                         <TableHead>
                         <TableRow>
-                            <TableCell>Dessert (100g serving)</TableCell>
-                            <TableCell align="right">Calories</TableCell>
-                            <TableCell align="right">Fat&nbsp;(g)</TableCell>
-                            <TableCell align="right">Carbs&nbsp;(g)</TableCell>
-                            <TableCell align="right">Protein&nbsp;(g)</TableCell>
+                            <TableCell>Name</TableCell>
+                            <TableCell align="left">Email</TableCell>
+                            <TableCell align="left">Service&nbsp;</TableCell>
+                            {/* <TableCell align="right">Carbs&nbsp;(g)</TableCell>
+                            <TableCell align="right">Protein&nbsp;(g)</TableCell> */}
                         </TableRow>
                         </TableHead>
                         <TableBody>
-                        {rows.map((row) => (
-                            <TableRow key={row.name}>
-                            <TableCell component="th" scope="row">
-                                {row.name}
-                            </TableCell>
-                            <TableCell align="right">{row.calories}</TableCell>
-                            <TableCell align="right">{row.fat}</TableCell>
-                            <TableCell align="right">{row.carbs}</TableCell>
-                            <TableCell align="right">{row.protein}</TableCell>
-                            </TableRow>
-                        ))}
+                          {orders.map((row) => (
+                              <TableRow key={row.name}>
+                              <TableCell component="th" scope="row">
+                                  {row.name}
+                              </TableCell>
+                              <TableCell align="left">{row.email}</TableCell>
+                              <TableCell align="left">{row.service}</TableCell>
+                              </TableRow>
+                          ))}
                         </TableBody>
                     </Table>
                 </TableContainer>

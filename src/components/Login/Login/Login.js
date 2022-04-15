@@ -21,7 +21,10 @@ if (!firebase.apps.length) {
 const MySwal = withReactContent(Swal)
 
 const Login = () => {
+
     const [loggedInUser, setLoggedInUser] = useContext(UserContext);
+
+
     let history = useHistory();
     let location = useLocation();
     let { from } = location.state || { from: { pathname: "/" } };
@@ -54,6 +57,7 @@ const Login = () => {
         }
         setUser(signedInUser);
         setLoggedInUser(signedInUser);
+        // storeAuthToken();
         history.replace(from);
         MySwal.fire({
             didOpen: () => {
@@ -117,7 +121,7 @@ const Login = () => {
     }
     if(event.target.name === 'password'){
       const isPasswordValid = event.target.value.length > 6;
-      const passwordHasNumber = /\d{1}/.test( event.target.value)
+      const passwordHasNumber = event.target.value;
       isFieldValid = isPasswordValid && passwordHasNumber;
 
     }
@@ -141,6 +145,7 @@ const Login = () => {
           newUserInfo.success = true;
           setUser(newUserInfo);
           setLoggedInUser(newUserInfo);
+          // storeAuthToken();
           history.replace(from)
           MySwal.fire({
             didOpen: () => {
@@ -175,6 +180,16 @@ const Login = () => {
 
     event.preventDefault()
   }
+
+  // const storeAuthToken = () => {
+  //   firebase.auth().currentUser.getIdToken(/* forceRefresh */ true)
+  //   .then(function(idToken) {
+  //     //console.log(idToken);
+  //     sessionStorage.setItem('token', idToken)
+  //   }).catch(function(error) {
+  //     // Handle error
+  //   });
+  // }
     return (
         <div>
         <Navbar></Navbar>

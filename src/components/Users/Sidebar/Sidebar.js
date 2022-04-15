@@ -4,16 +4,27 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
-import PeopleIcon from '@material-ui/icons/People';
 import PowerSettingsNewIcon from '@material-ui/icons/PowerSettingsNew';
 import ViewListIcon from '@material-ui/icons/ViewList';
 import RateReviewIcon from '@material-ui/icons/RateReview';
 import { Link } from 'react-router-dom';
 import './Sidebar.css';
 import { UserContext } from '../../../App';
+import { PersonAddIcon } from '@material-ui/icons/PersonAdd';
+import { useState, useEffect } from 'react';
 
 const Sidebar = () => {
   const [loggedInUser, setLoggedInUser] = useContext(UserContext)
+  const [isAdmin, setIsAdmin] = useState(false)
+  useEffect(() => {
+      fetch('http://localhost:5000/isAdmin', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json'},
+        body: JSON.stringify({email: loggedInUser.email})
+      })
+      .then(res => res.json())
+      .then(data => setIsAdmin(data))
+  },[])
   return (
     <div>
         <ListItem button>
@@ -46,12 +57,47 @@ const Sidebar = () => {
             <ListItemText primary="Review" />
         </ListItem>
         </Link>
+
+        {
+          isAdmin && 
+          
+              <Link to="/newAdmin"  className="navbarLinks">
+                <ListItem button>
+                    <ListItemIcon>
+                    <RateReviewIcon />
+                    </ListItemIcon>
+                    <ListItemText primary="Add Admin" />
+                </ListItem>
+              </Link>
+        }
+        { isAdmin &&
+              <Link to="/allOrders"  className="navbarLinks">
+              <ListItem button>
+                  <ListItemIcon>
+                  <RateReviewIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="Orders" />
+              </ListItem>
+              </Link>
+        }
+        
+
+
+        {/* <Link to="/addAdmin" className="navbarLinks">
+        <ListItem button>
+            <ListItemIcon>
+            <PersonAddIcon />
+            </ListItemIcon>
+            <ListItemText primary="Add Admin" />
+        </ListItem>
+        </Link> */}
+
         <ListItem button onClick={()=>setLoggedInUser({})}>
         <ListItemIcon>
           <PowerSettingsNewIcon />
         </ListItemIcon>
         <ListItemText primary="Logout" />
-      </ListItem>
+        </ListItem>
     </div>
   );
 };

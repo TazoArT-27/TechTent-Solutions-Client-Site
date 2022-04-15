@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -16,6 +16,8 @@ import NotificationsIcon from '@material-ui/icons/Notifications';
 import { Link } from 'react-router-dom';
 import Sidebar from '../Sidebar/Sidebar';
 import { useForm } from "react-hook-form";
+import { UserContext } from '../../../App';
+import { useState } from 'react';
 
 const drawerWidth = 240;
   
@@ -110,7 +112,31 @@ const OrderForm = () => {
     };
 
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
-    const onSubmit = data => console.log(data);
+    //const onSubmit = data => console.log(data);
+
+    const [loggedInUser, setLoggedInUser] = useContext(UserContext)
+    const [info, setInfo] = useState({
+      name: loggedInUser.name,
+      email: loggedInUser.email
+
+    })
+
+    const onSubmit = (data) => {
+      // const newOrder = {...loggedInUser}
+      fetch('http://localhost:5000/addOrderedServices', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify(data, {email: loggedInUser.email})
+        })
+        .then(res => res.json())
+        .then(success => {
+            if (success) {
+                alert('Submitted Successfully')
+            }
+
+        })
+    }
+
     return (
         <div>
             <div className={classes.root}>
@@ -133,6 +159,9 @@ const OrderForm = () => {
                 </Link>
                 <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
                     Dashboard
+                </Typography>
+                <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
+                    <h6>Hello, {loggedInUser.name}!</h6>
                 </Typography>
                 <IconButton color="inherit">
                     <Badge badgeContent={4} color="secondary">
@@ -163,12 +192,12 @@ const OrderForm = () => {
                         {/* <input defaultValue="test" {...register("example")} /> */}
                         <div class="mb-3">
                             <label for="exampleFormControlInput1" class="form-label">Name</label>
-                            <input name="name" {...register("name", { required: true })} type="text" class="form-control" id="exampleFormControlInput1" placeholder="name"/>
+                            <input name="name" {...register("name", { required: true })} type="text" class="form-control" id="exampleFormControlInput1" placeholder="name" value={info.name}/>
                             {errors.name && <span className="text-danger">Name is required</span>}
                         </div>
                         <div class="mb-3">
                             <label for="exampleFormControlInput1" class="form-label">Email</label>
-                            <input name="email" {...register("email", { required: true })} type="email" class="form-control" id="exampleFormControlInput1" placeholder="email"/>
+                            <input name="email" {...register("email", { required: true })} type="email" class="form-control" id="exampleFormControlInput1" placeholder="email" value={info.email}/>
                             {errors.email && <span className="text-danger">Email is required</span>}
                         </div>
                         <div class="mb-3">
@@ -177,6 +206,7 @@ const OrderForm = () => {
                             {errors.service && <span className="text-danger">Service name is required</span>}
                         </div>
                         <input type="submit" />
+                        {/* <button type="submit" class="">Submit</button> */}
                     </form>
                     </div>
             </main>

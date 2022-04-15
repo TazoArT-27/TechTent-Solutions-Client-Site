@@ -3,6 +3,8 @@ import "./ContactMain.css";
 import * as emailjs from "emailjs-com";
 import ChatIcon from '@material-ui/icons/Chat';
 import TelegramIcon from '@material-ui/icons/Telegram';
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
 
 const ContactMain = () => {
 
@@ -12,7 +14,12 @@ const ContactMain = () => {
 
     emailjs.sendForm('techtentsolutions', 'template_ur3r94t', e.target, 'user_YiZ6wrwB0LP8aRKuBmMUy')
         .then((result) => {
-            console.log(result.text);
+            Swal.fire({
+                icon: 'success',
+                title: 'Done',
+                text: 'Message sent successfully',
+              })
+            //console.log(result.text);
         }, (error) => {
             console.log(error.text);
         });

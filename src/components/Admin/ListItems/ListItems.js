@@ -13,8 +13,8 @@ import ListAltIcon from '@material-ui/icons/ListAlt';
 import { Link } from 'react-router-dom';
 import './ListItems.css';
 import { UserContext } from './../../../App';
-
-
+ 
+ 
 const ListItems = () => {
   const [loggedInUser, setLoggedInUser] = useContext(UserContext);
   return (
@@ -53,17 +53,17 @@ const ListItems = () => {
         </ListItemIcon>
         <ListItemText primary="Integrations" />
       </ListItem> */}
-
-    
+ 
+ 
       <ListSubheader inset>Management</ListSubheader>
-      <Link to="/addAdmin" className="navbarLinks">
+      {/* <Link to="/addAdmin" className="navbarLinks">
         <ListItem button>
             <ListItemIcon>
             <PersonAddIcon />
             </ListItemIcon>
             <ListItemText primary="Add Admin" />
         </ListItem>
-      </Link>
+      </Link> */}
       <Link to="/addService" className="navbarLinks">
         <ListItem button>
             <ListItemIcon>
@@ -87,9 +87,5 @@ const ListItems = () => {
     </div>
   );
 };
-
+ 
 export default ListItems;
-
-// export const mainListItems = (
-  
-//   );

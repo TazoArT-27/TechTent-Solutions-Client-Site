@@ -31,9 +31,9 @@ const Navbar = () => {
                             <li className="nav-item">
                                 <a className="nav-link me-5 text-nav" aria-current="page" href="#testimonial">Reviews</a>
                             </li>
-                            <li className="nav-item">
+                            {/* <li className="nav-item">
                                 <Link to="/admin" className="nav-link me-5 text-nav" aria-current="page">Admin</Link>
-                            </li>
+                            </li> */}
                             <li class="nav-item">
                                 <Link to="/orderUser" className="nav-link text-nav" aria-current="page">Login</Link>
                             </li>
