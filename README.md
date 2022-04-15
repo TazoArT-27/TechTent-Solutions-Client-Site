@@ -46,9 +46,7 @@ The key features are :
 * [React Hook Form](https://react-hook-form.com/)
 * [Firebase](https://firebase.google.com/)
 * [Google Map](https://cloud.google.com/maps-platform)
-* [Recharts](https://recharts.org/en-US/)
 * [React FontAwesome](https://fontawesome.com/v5.15/how-to-use/on-the-web/using-with/react)
-* [Stripe](https://stripe.com/en-gb-us)
 
 ### BackEnd Built With
 * [Node.JS](https://nodejs.org/en/)
