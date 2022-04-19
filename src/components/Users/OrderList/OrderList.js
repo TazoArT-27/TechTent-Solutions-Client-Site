@@ -9,10 +9,8 @@ import List from '@material-ui/core/List';
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
-import Badge from '@material-ui/core/Badge';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import NotificationsIcon from '@material-ui/icons/Notifications';
 import Paper from '@material-ui/core/Paper';
 import { Link } from 'react-router-dom';
 import Sidebar from '../Sidebar/Sidebar';
@@ -66,6 +64,8 @@ const useStyles = makeStyles((theme) => ({
   },
   title: {
     flexGrow: 1,
+    textDecoration: 'none',
+    color: 'white'
   },
   drawerPaper: {
     position: 'relative',
@@ -110,16 +110,6 @@ const useStyles = makeStyles((theme) => ({
     minWidth: 650,
   },
 }));
-// function createData(name, calories, fat, carbs, protein) {
-//     return { name, calories, fat, carbs, protein };
-//   }
-// const rows = [
-//     createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-//     createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-//     createData('Eclair', 262, 16.0, 24, 6.0),
-//     createData('Cupcake', 305, 3.7, 67, 4.3),
-//     createData('Gingerbread', 356, 16.0, 49, 3.9),
-//   ];
 
 const OrderList = () => {
     const classes = useStyles();
@@ -135,14 +125,6 @@ const OrderList = () => {
     const [loggedInUser, setLoggedInUser] = useContext(UserContext);
     useEffect(() => {
       fetch('http://localhost:5000/orders?email='+loggedInUser.email)
-      // , {
-      //   method: 'GET',
-      //   headers: { 
-      //     'Content-Type': 'application/json',
-      //     // authorization: `Bearer ${sessionStorage.getItem('token')}`
-      // }
-      // }
-      
       .then(res => res.json())
       .then(data => setOrders(data))
     }, [])
@@ -169,14 +151,6 @@ const OrderList = () => {
                         Home
                     </Typography>
                 </Link>
-                <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
-                    Dashboard
-                </Typography>
-                <IconButton color="inherit">
-                    <Badge badgeContent={4} color="secondary">
-                    <NotificationsIcon />
-                    </Badge>
-                </IconButton>
                 </Toolbar>
             </AppBar>   
             <Drawer
@@ -204,8 +178,6 @@ const OrderList = () => {
                             <TableCell>Name</TableCell>
                             <TableCell align="left">Email</TableCell>
                             <TableCell align="left">Service&nbsp;</TableCell>
-                            {/* <TableCell align="right">Carbs&nbsp;(g)</TableCell>
-                            <TableCell align="right">Protein&nbsp;(g)</TableCell> */}
                         </TableRow>
                         </TableHead>
                         <TableBody>

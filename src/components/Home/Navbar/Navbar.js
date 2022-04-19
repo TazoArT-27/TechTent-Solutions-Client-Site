@@ -29,7 +29,7 @@ const Navbar = () => {
                                 <Link to="/contact" className="nav-link me-5 text-nav" aria-current="page">Contact</Link>
                             </li>
                             <li className="nav-item">
-                                <a className="nav-link me-5 text-nav" aria-current="page" href="#testimonial">Reviews</a>
+                                <Link to='/reviewPage' className="nav-link me-5 text-nav" aria-current="page">Reviews</Link>
                             </li>
                             {/* <li className="nav-item">
                                 <Link to="/admin" className="nav-link me-5 text-nav" aria-current="page">Admin</Link>

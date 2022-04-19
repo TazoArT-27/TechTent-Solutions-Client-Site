@@ -9,15 +9,16 @@ import List from '@material-ui/core/List';
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
-import Badge from '@material-ui/core/Badge';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import NotificationsIcon from '@material-ui/icons/Notifications';
 import { Link } from 'react-router-dom';
 import Sidebar from '../Sidebar/Sidebar';
 import { useForm } from "react-hook-form";
 import { UserContext } from '../../../App';
 import { useState } from 'react';
+import './OrderForm.css';
+import Swal from 'sweetalert2'
+
 
 const drawerWidth = 240;
   
@@ -58,6 +59,8 @@ const useStyles = makeStyles((theme) => ({
   },
   title: {
     flexGrow: 1,
+    textDecoration: 'none',
+    color: 'white'
   },
   drawerPaper: {
     position: 'relative',
@@ -122,7 +125,6 @@ const OrderForm = () => {
     })
 
     const onSubmit = (data) => {
-      // const newOrder = {...loggedInUser}
       fetch('http://localhost:5000/addOrderedServices', {
         method: 'POST',
         headers: { 'content-type': 'application/json' },
@@ -130,9 +132,11 @@ const OrderForm = () => {
         })
         .then(res => res.json())
         .then(success => {
-            if (success) {
-                alert('Submitted Successfully')
-            }
+            Swal.fire({
+              icon: 'success',
+              title: 'Done',
+              text: 'Order Placed Successfully',
+            })
 
         })
     }
@@ -157,17 +161,6 @@ const OrderForm = () => {
                         Home
                     </Typography>
                 </Link>
-                <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
-                    Dashboard
-                </Typography>
-                <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
-                    <h6>Hello, {loggedInUser.name}!</h6>
-                </Typography>
-                <IconButton color="inherit">
-                    <Badge badgeContent={4} color="secondary">
-                    <NotificationsIcon />
-                    </Badge>
-                </IconButton>
                 </Toolbar>
             </AppBar>   
             <Drawer
@@ -189,10 +182,9 @@ const OrderForm = () => {
                 <div className={classes.appBarSpacer} />
                     <div className="p-5">
                     <form onSubmit={handleSubmit(onSubmit)}>
-                        {/* <input defaultValue="test" {...register("example")} /> */}
                         <div class="mb-3">
                             <label for="exampleFormControlInput1" class="form-label">Name</label>
-                            <input name="name" {...register("name", { required: true })} type="text" class="form-control" id="exampleFormControlInput1" placeholder="name" value={info.name}/>
+                            <input name="name" {...register("name", { required: true })} type="text" class="form-control" id="exampleFormControlInput1" placeholder="name"/>
                             {errors.name && <span className="text-danger">Name is required</span>}
                         </div>
                         <div class="mb-3">
@@ -205,8 +197,7 @@ const OrderForm = () => {
                             <input name="service" {...register("service", { required: true })} type="text" class="form-control" id="exampleFormControlInput1" placeholder="service name"/>
                             {errors.service && <span className="text-danger">Service name is required</span>}
                         </div>
-                        <input type="submit" />
-                        {/* <button type="submit" class="">Submit</button> */}
+                        <button type="submit" className="btn btn-primary btn-order">Submit Order</button>
                     </form>
                     </div>
             </main>

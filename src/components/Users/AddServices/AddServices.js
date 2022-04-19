@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -9,13 +9,12 @@ import List from '@material-ui/core/List';
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
-import Badge from '@material-ui/core/Badge';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import NotificationsIcon from '@material-ui/icons/Notifications';
 import { Link } from 'react-router-dom';
-import ListItems from '../ListItems/ListItems';
-import { useForm } from "react-hook-form";
+import Sidebar from '../Sidebar/Sidebar';
+import { UserContext } from '../../../App';
+import { useState } from 'react';
 
 const drawerWidth = 240;
   
@@ -56,6 +55,8 @@ const useStyles = makeStyles((theme) => ({
   },
   title: {
     flexGrow: 1,
+    textDecoration: 'none',
+    color: 'white'
   },
   drawerPaper: {
     position: 'relative',
@@ -98,7 +99,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const AddService = () => {
+
+const AddServices = () => {
     const classes = useStyles();
     const [open, setOpen] = React.useState(true);
     const handleDrawerOpen = () => {
@@ -108,8 +110,40 @@ const AddService = () => {
         setOpen(false);
     };
 
-    const { register, handleSubmit, watch, formState: { errors } } = useForm();
-    const onSubmit = data => console.log(data);
+
+    const [loggedInUser, setLoggedInUser] = useContext(UserContext)
+    const [info, setInfo] = useState({});
+    const [file, setFile] = useState(null);
+    const handleBlur = e => {
+        const newInfo = {...info};
+        newInfo[e.target.name] = e.target.value;
+        setInfo(newInfo);
+    }
+
+    const handleFileChange = e => {
+        const newFile = e.target.files[0];
+        setFile(newFile);
+    }
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        const formData = new FormData();
+        formData.append('file', file)
+        formData.append('name', info.name)
+        formData.append('description', info.description)
+        fetch('http://localhost:5000/addServices', {
+            method: 'POST',
+            body: formData,
+        })
+        .then(res => res.json())
+        .then(data => {
+            console.log(data);
+        })
+        .catch(err => {
+            console.log(err);
+        })
+    }
+
     return (
         <div>
             <div className={classes.root}>
@@ -130,14 +164,6 @@ const AddService = () => {
                         Home
                     </Typography>
                 </Link>
-                <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
-                    Dashboard
-                </Typography>
-                <IconButton color="inherit">
-                    <Badge badgeContent={4} color="secondary">
-                    <NotificationsIcon />
-                    </Badge>
-                </IconButton>
                 </Toolbar>
             </AppBar>   
             <Drawer
@@ -153,33 +179,25 @@ const AddService = () => {
                 </IconButton>
                 </div>
                 <Divider />
-                <List><ListItems/></List>
+                <List><Sidebar/></List>
             </Drawer> 
             <main className={classes.content}>
                 <div className={classes.appBarSpacer} />
                     <div className="p-5">
-                    <form onSubmit={handleSubmit(onSubmit)}>
-                        {/* <input defaultValue="test" {...register("example")} /> */}
+                    <form onSubmit={handleSubmit}>
                         <div class="mb-3">
-                            <label for="exampleFormControlInput1" class="form-label">Name</label>
-                            <input name="name" {...register("name", { required: true })} type="text" class="form-control" id="exampleFormControlInput1" placeholder="name"/>
-                            {errors.name && <span className="text-danger">Name is required</span>}
+                            <label for="exampleFormControlInput1" class="form-label"> Service Name</label>
+                            <input onBlur={handleBlur} name="name" type="text" class="form-control" placeholder="service name" required />
                         </div>
                         <div class="mb-3">
                             <label for="exampleFormControlInput1" class="form-label">Description</label>
-                            <input name="description" {...register("description", { required: true })} type="text" class="form-control" id="exampleFormControlInput1" placeholder="description"/>
-                            {errors.description && <span className="text-danger">Description is required</span>}
+                            <input onBlur={handleBlur} name="description"  type="text" class="form-control" placeholder="description" required/>
                         </div>
                         <div class="mb-3">
                             <label for="formFile" class="form-label">Upload Image</label>
-                            <input name="file" {...register("file", { required: true })} class="form-control" type="file" id="formFile"/>
-                            {errors.file && <span className="text-danger">Image required</span>}
+                            <input onChange={handleFileChange} name="file" class="form-control" type="file" id="formFile" required/>
                         </div>
-                        
-                        {/* <input {...register("exampleRequired", { required: true })} />
-                        {errors.exampleRequired && <span>This field is required</span>} */}
-                        
-                        <input type="submit" />
+                        <button type="submit" class="btn btn-primary btn-order">Add Service</button>
                     </form>
                     </div>
             </main>
@@ -188,4 +206,4 @@ const AddService = () => {
     );
 };
 
-export default AddService;
+export default AddServices;

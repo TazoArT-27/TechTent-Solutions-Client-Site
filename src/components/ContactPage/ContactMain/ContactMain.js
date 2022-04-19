@@ -4,7 +4,6 @@ import * as emailjs from "emailjs-com";
 import ChatIcon from '@material-ui/icons/Chat';
 import TelegramIcon from '@material-ui/icons/Telegram';
 import Swal from 'sweetalert2'
-import withReactContent from 'sweetalert2-react-content'
 
 const ContactMain = () => {
 
@@ -19,7 +18,6 @@ const ContactMain = () => {
                 title: 'Done',
                 text: 'Message sent successfully',
               })
-            //console.log(result.text);
         }, (error) => {
             console.log(error.text);
         });
@@ -56,7 +54,6 @@ const ContactMain = () => {
                             <div className="mb-4">
                                 <button type="submit" className="btn btn-order text-white mb-3">Submit</button>
                             </div>
-                            
                         </form>
                     </div>
                 </div>

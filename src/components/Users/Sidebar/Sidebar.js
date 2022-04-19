@@ -7,11 +7,14 @@ import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import PowerSettingsNewIcon from '@material-ui/icons/PowerSettingsNew';
 import ViewListIcon from '@material-ui/icons/ViewList';
 import RateReviewIcon from '@material-ui/icons/RateReview';
+import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
+import BorderAllIcon from '@material-ui/icons/BorderAll';
+import SettingsApplicationsIcon from '@material-ui/icons/SettingsApplications';
 import { Link } from 'react-router-dom';
 import './Sidebar.css';
 import { UserContext } from '../../../App';
-import { PersonAddIcon } from '@material-ui/icons/PersonAdd';
 import { useState, useEffect } from 'react';
+import './Sidebar.css';
 
 const Sidebar = () => {
   const [loggedInUser, setLoggedInUser] = useContext(UserContext)
@@ -64,7 +67,7 @@ const Sidebar = () => {
               <Link to="/newAdmin"  className="navbarLinks">
                 <ListItem button>
                     <ListItemIcon>
-                    <RateReviewIcon />
+                    <SupervisorAccountIcon />
                     </ListItemIcon>
                     <ListItemText primary="Add Admin" />
                 </ListItem>
@@ -74,24 +77,23 @@ const Sidebar = () => {
               <Link to="/allOrders"  className="navbarLinks">
               <ListItem button>
                   <ListItemIcon>
-                  <RateReviewIcon />
+                  <BorderAllIcon />
                   </ListItemIcon>
-                  <ListItemText primary="Orders" />
+                  <ListItemText primary="All Orders" />
+              </ListItem>
+              </Link>
+        }
+        { isAdmin &&
+              <Link to="/addServices"  className="navbarLinks">
+              <ListItem button>
+                  <ListItemIcon>
+                  <SettingsApplicationsIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="Add Services" />
               </ListItem>
               </Link>
         }
         
-
-
-        {/* <Link to="/addAdmin" className="navbarLinks">
-        <ListItem button>
-            <ListItemIcon>
-            <PersonAddIcon />
-            </ListItemIcon>
-            <ListItemText primary="Add Admin" />
-        </ListItem>
-        </Link> */}
-
         <ListItem button onClick={()=>setLoggedInUser({})}>
         <ListItemIcon>
           <PowerSettingsNewIcon />

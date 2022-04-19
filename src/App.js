@@ -9,15 +9,15 @@ import ServicesPage from "./components/ServicesPage/ServicesPage/ServicesPage";
 import ContactPage from './components/ContactPage/ContactPage/ContactPage';
 import OrderForm from "./components/Users/OrderForm/OrderForm";
 import Review from "./components/Users/Review/Review";
+import ReviewPage from './components/ReviewPage/Review/Review';
 import OrderList from "./components/Users/OrderList/OrderList";
 import Login from "./components/Login/Login/Login";
 import PrivateRoute from './components/Login/PrivateRoute/PrivateRoute';
 import SignUp from "./components/Login/SignUp/SignUp";
 import NotFound from "./components/NotFound/NotFound";
-// import AddAdmin from './components/Users/AddAdmin/AddAdmin';
-import AddAdmin from './components/Admin/AddAdmin/AddAdmin';
 import AddNewAdmin from './components/Users/AddNewAdmin/AddNewAdmin'
 import AllOrders from './components/Users/AllOrders/AllOrders'
+import AddServices from './components/Users/AddServices/AddServices';
 
 export const UserContext = createContext();
 
@@ -39,6 +39,9 @@ function App() {
         <Route path="/contact">
           <ContactPage></ContactPage>
         </Route>
+        <Route path="/reviewPage">
+          <ReviewPage></ReviewPage>
+        </Route>
         <Route path="/login">
           <Login></Login>
         </Route>
@@ -57,6 +60,9 @@ function App() {
         </PrivateRoute>
         <PrivateRoute path="/newAdmin">
           <AddNewAdmin></AddNewAdmin>
+        </PrivateRoute>
+        <PrivateRoute path="/addServices">
+          <AddServices></AddServices>
         </PrivateRoute>
         {/* <PrivateRoute path="/newAdmin">
           <AddNewAdmin></AddNewAdmin>

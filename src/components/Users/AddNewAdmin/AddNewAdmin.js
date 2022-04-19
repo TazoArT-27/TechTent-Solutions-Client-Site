@@ -9,15 +9,15 @@ import List from '@material-ui/core/List';
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
-import Badge from '@material-ui/core/Badge';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import NotificationsIcon from '@material-ui/icons/Notifications';
 import { Link } from 'react-router-dom';
 import Sidebar from '../Sidebar/Sidebar';
 import { useForm } from "react-hook-form";
 import { UserContext } from '../../../App';
 import { useState, useContext } from 'react';
+import Swal from 'sweetalert2'
+
 
 const drawerWidth = 240;
   
@@ -58,6 +58,8 @@ const useStyles = makeStyles((theme) => ({
   },
   title: {
     flexGrow: 1,
+    textDecoration: 'none',
+    color: 'white'
   },
   drawerPaper: {
     position: 'relative',
@@ -110,7 +112,6 @@ const AddAdmin = () => {
     };
 
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
-    //const onSubmit = data => console.log(data);
     const [loggedInUser, setLoggedInUser] = useContext(UserContext)
     const [info, setInfo] = useState({
       name: loggedInUser.name,
@@ -127,10 +128,11 @@ const AddAdmin = () => {
           })
           .then(res => res.json())
           .then(success => {
-              if (success) {
-                  alert('Submitted Successfully')
-              }
-  
+            Swal.fire({
+              icon: 'success',
+              title: 'Done',
+              text: 'Admin Added Successfully',
+            })
           })
       }
 
@@ -154,17 +156,6 @@ const AddAdmin = () => {
                         Home
                     </Typography>
                 </Link>
-                <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
-                    Dashboard
-                </Typography>
-                <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
-                    <h6>Hello, {loggedInUser.name}!</h6>
-                </Typography>
-                <IconButton color="inherit">
-                    <Badge badgeContent={4} color="secondary">
-                    <NotificationsIcon />
-                    </Badge>
-                </IconButton>
                 </Toolbar>
             </AppBar>
             <Drawer
@@ -186,7 +177,6 @@ const AddAdmin = () => {
                 <div className={classes.appBarSpacer} />
                     <div className="p-5">
                     <form onSubmit={handleSubmit(onSubmit)}>
-                        {/* <input defaultValue="test" {...register("example")} /> */}
                         <div class="mb-3">
                             <label for="exampleFormControlInput1" class="form-label">Name</label>
                             <input name="name" {...register("name", { required: true })} type="text" class="form-control" id="exampleFormControlInput1" placeholder="name"/>
@@ -197,11 +187,7 @@ const AddAdmin = () => {
                             <input name="email" {...register("email", { required: true })} type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com"/>
                             {errors.email && <span className="text-danger">Email required</span>}
                         </div>
-                        
-                        {/* <input {...register("exampleRequired", { required: true })} />
-                        {errors.exampleRequired && <span>This field is required</span>} */}
-                        
-                        <input type="submit" />
+                        <button type="submit" className="btn btn-primary btn-order">Add Admin</button>
                     </form>
                     </div>
             </main>

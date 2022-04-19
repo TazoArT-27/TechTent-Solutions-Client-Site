@@ -9,15 +9,15 @@ import List from '@material-ui/core/List';
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
-import Badge from '@material-ui/core/Badge';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import NotificationsIcon from '@material-ui/icons/Notifications';
 import { Link } from 'react-router-dom';
 import Sidebar from '../Sidebar/Sidebar';
 import { useForm } from "react-hook-form";
 import { UserContext } from '../../../App';
 import { useState } from 'react';
+import Swal from 'sweetalert2'
+
 
 const drawerWidth = 240;
   
@@ -58,6 +58,8 @@ const useStyles = makeStyles((theme) => ({
   },
   title: {
     flexGrow: 1,
+    textDecoration: 'none',
+    color: 'white'
   },
   drawerPaper: {
     position: 'relative',
@@ -113,7 +115,6 @@ const Review = () => {
     };
 
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
-    //const onSubmit = data => console.log(data);
 
     const [loggedInUser, setLoggedInUser] = useContext(UserContext)
     const [info, setInfo] = useState({
@@ -131,10 +132,11 @@ const Review = () => {
         })
         .then(res => res.json())
         .then(success => {
-            if (success) {
-                alert('Submitted Successfully')
-            }
-
+          Swal.fire({
+            icon: 'success',
+            title: 'Done',
+            text: 'Review Added Successfully',
+          })
         })
     }
 
@@ -153,22 +155,11 @@ const Review = () => {
                 >
                     <MenuIcon />
                 </IconButton>
-                <Link to="/home" className="homeLink">
+                <Link to="/home"  className="homeLink">
                     <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
                         Home
                     </Typography>
                 </Link>
-                <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
-                    Dashboard
-                </Typography>
-                <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
-                    <h6>{loggedInUser.name}, you can share your experience with us.</h6>
-                </Typography>
-                <IconButton color="inherit">
-                    <Badge badgeContent={4} color="secondary">
-                    <NotificationsIcon />
-                    </Badge>
-                </IconButton>
                 </Toolbar>
             </AppBar>   
             <Drawer
@@ -190,18 +181,22 @@ const Review = () => {
                 <div className={classes.appBarSpacer} />
                     <div className="p-5">
                     <form onSubmit={handleSubmit(onSubmit)}>
-                        {/* <input defaultValue="test" {...register("example")} /> */}
                         <div class="mb-3">
                             <label for="exampleFormControlInput1" class="form-label">Name</label>
-                            <input name="name" {...register("name", { required: true })} type="text" class="form-control" id="exampleFormControlInput1" placeholder="name" value={info.name}/>
+                            <input name="name" {...register("name", { required: true })} type="text" class="form-control" id="exampleFormControlInput1" placeholder="name"/>
                             {errors.name && <span className="text-danger">Name is required</span>}
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleFormControlInput1" class="form-label">Address</label>
+                            <input name="address" {...register("address", { required: true })} type="text" class="form-control" id="exampleFormControlInput1" placeholder="give your address"/>
+                            {errors.address && <span className="text-danger">Address is required</span>}
                         </div>
                         <div class="mb-3">
                             <label for="exampleFormControlInput1" class="form-label">Review</label>
                             <input name="review" {...register("review", { required: true })} type="text" class="form-control" id="exampleFormControlInput1" placeholder="say something"/>
                             {errors.review && <span className="text-danger">Review is required</span>}
                         </div>
-                        <input type="submit" />
+                        <button type="submit" className="btn btn-primary btn-order">Submit Review</button>
                     </form>
                     </div>
             </main>

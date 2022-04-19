@@ -15,8 +15,6 @@ const ServicesFooter = () => {
                         <div className="col-md-4 offset-md-1 col-sm-12">
                             <h1 className="pb-3 fw-bold">Want a custom website for your business?</h1>
                             <h6 className="pb-5">Whether you want to make a custom website for your business or have any questions, <span  className="fw-bold techTent">we are here 24X7</span> to help your business grow.</h6>
-                            {/* <p className="pb-3 fw-bold">+880 1521773102</p> */}
-                            {/* <p className="pb-3 fw-bold">shafayat.tazoar27@gmail.com</p> */}
                             <button type="button" class="btn btn-primary btn-service-footer">
                                 <CallIcon className="svg_icons_call me-3"></CallIcon>Call Us On +880 1521773102
                             </button>
